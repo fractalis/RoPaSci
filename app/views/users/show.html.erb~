@@ -1,0 +1,24 @@
+<div class="box">
+
+  <p>
+    <b>Login:</b>
+    <%=h @user.login %>
+  </p>
+  
+  <p>
+    <b>Last Login at:</b>
+    <%=h @user.last_login_at %>
+  </p>
+
+  <p>
+    <b>Last Login IP:</b>
+    <%=h @user.last_login_ip %>
+  </p>
+
+  <p>
+    <b>Current Login IP:</b>
+    <%=h @user.current_login_ip %>
+  </p>
+
+  <%= link_to 'edit', edit_account_path %>
+</div>

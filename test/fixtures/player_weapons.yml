@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  level: 1
+  attack_score: 1
+  defense_score: 1
+
+two:
+  level: 1
+  attack_score: 1
+  defense_score: 1

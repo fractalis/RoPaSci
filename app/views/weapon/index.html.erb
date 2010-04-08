@@ -1,0 +1,25 @@
+<h2>RoPaSci Weapons</h2>
+
+<table>
+<tr>
+  <th>Weapon Name</th>
+  <th>Base Attack</th>
+  <th>Base Defense</th>
+  <th>Base HP Regen</th>
+  <th>Attack Modifier</th>
+  <th>Defense Modifier</th>
+  <th>HP Regen Modifier</th>
+</tr>
+
+<% @weapons.each do |weapon| %>
+<tr>
+  <td><%= weapon.name %></td>
+  <td><%= weapon.base_attack %></td>
+  <td><%= weapon.base_defense %></td>
+  <td><%= weapon.base_hp_regen %></td>
+  <td><%= weapon.mod_attack %></td>
+  <td><%= weapon.mod_defense %></td>
+  <td><%= weapon.mod_hp_regen %></td>
+</td>
+<% end %>
+

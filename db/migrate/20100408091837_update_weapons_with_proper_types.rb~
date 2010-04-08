@@ -1,0 +1,19 @@
+class UpdateWeaponsWithProperTypes < ActiveRecord::Migration
+  def self.up
+    change_column :weapon, :base_attack, :float
+    change_column :weapon, :base_defense, :float
+    change_column :weapon, :mod_attack, :float
+    change_column :weapon, :mod_defense, :float
+    add_column :weapon, :base_hp_regen, :float
+    add_column :weapon, :mod_hp_regen, :float
+  end
+
+  def self.down
+    remove_column :weapon, :base_hp_regen
+    remove_column :weapon, :mod_hp_regen
+    change_column :weapon, :base_attack, :int
+    change_column :weapon, :base_defense, :int
+    change_column :weapon, :mod_attack, :int
+    change_column :weapon, :mod_defense, :int    
+  end
+end
