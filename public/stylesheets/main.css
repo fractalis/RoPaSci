@@ -1,10 +1,10 @@
-body { background: #4f2f2f; color: #000; }
+body { background: #000 url(../images/bgbody.jpg) top center no-repeat; color: #eee; padding: 0 0 15px 0; margin: 0; text-align: center; }
 
-div.box { margin: 100px auto 2em; background: #8f8f8f; color: #000; width: 50%; text-align: center; border: 2px solid #fff; font-size: 105%; }
+div.box { margin: 100px auto 2em; background: #8f8f8f; color: #000; text-align: center; border: 2px solid #fff; font-size: 105%; } 
 
-h2.game { font-size: 600%; text-align: center; background: #222; color: #7f7fcf; }
+#header h2 { font-size: 250%; background: #222; }
 
-div.menu { background: #3f4f6f; padding: 5px 5px; border: 2px solid #fff; }
+div.menu { margin-left: 10px; font-size: 150%; }
 div.menu a { color: #9fef9f; margin-left: 20px; padding: 5px 5px; }
 div.menu a:visited { Color: #ef9f9f; }
 

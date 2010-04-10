@@ -1,41 +1,49 @@
 <html>
 <head>
   <title>RoPaSci</title>
-  <%= stylesheet_link_tag "main.css" %>
+  <%= stylesheet_link_tag "main.css", "grid12.css" %>
 </head>
 
 <body>
-  <h2 class="game">RoPaSci</h2>
-  <div class="menu">
-    <% if !current_user %>
-    <%= link_to "Register", new_account_path %>
-    <%= link_to "Login In", new_user_session_path %>
-    <% else %>
-     <%= link_to "My Account", account_path %>
-     <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to log out?" %>
-     <%= link_to "Weapons", :controller => "weapon", :method => :index %>
+  <div class="container_12">
+    <div class="grid_12">
+      <div id="header" class="grid_12">
+	<h2 class="game">RoPaSci</h2>      
+      </div>
+    
+    <div class="menu push_3 grid_6">
+	  <% if !current_user %>
+	  <%= link_to "Register", new_account_path %>
+	  <%= link_to "Login In", new_user_session_path %>
+	  <% else %>
+	  <%= link_to "My Account", account_path %>
+	  <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to log out?" %>
+    <%= link_to "Weapons", :controller => "weapon", :method => :index %>
     <% end %>
-  </div>
-
-  <div class="error">
-    <ul>
-      <% if !flash[:error].nil? 
-	 flash[:error].each do |error| %>
-         <li><%= error %></li>
-	 <% end %>
-      <% end %>
-    </ul>
-  </div>
-  
-  <div class="notice">
-    <ul>
-      <% if !flash[:notice].nil? 
-	 flash[:notice].each do |notice| %>
-         <li><%= notice %></li>
-	 <% end %>
-      <% end %>
-    </ul>
-  </div>
-  <%= yield %>
+  </div></div>
+    <div class="grid_12">
+    <div id="main" class="grid_11">
+      <div class="error">
+	<ul>
+	  <% if !flash[:error].nil? 
+	     flash[:error].each do |error| %>
+          <li><%= error %></li>
+	  <% end %>
+	  <% end %>
+	</ul>
+      </div>
+      
+      <div class="notice">
+	<ul>
+	  <% if !flash[:notice].nil? 
+	     flash[:notice].each do |notice| %>
+          <li><%= notice %></li>
+	  <% end %>
+	  <% end %>
+	</ul>
+      </div>
+      <%= yield %>
+    </div>
+  </div></div>
 </body>
 </html>
