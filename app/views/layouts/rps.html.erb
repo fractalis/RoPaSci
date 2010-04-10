@@ -16,6 +16,26 @@
      <%= link_to "Weapons", :controller => "weapon", :method => :index %>
     <% end %>
   </div>
+
+  <div class="error">
+    <ul>
+      <% if !flash[:error].nil? 
+	 flash[:error].each do |error| %>
+         <li><%= error %></li>
+	 <% end %>
+      <% end %>
+    </ul>
+  </div>
+  
+  <div class="notice">
+    <ul>
+      <% if !flash[:notice].nil? 
+	 flash[:notice].each do |notice| %>
+         <li><%= notice %></li>
+	 <% end %>
+      <% end %>
+    </ul>
+  </div>
   <%= yield %>
 </body>
 </html>

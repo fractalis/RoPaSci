@@ -1,0 +1,15 @@
+class NoScoresAddStatsPlayerWeapons < ActiveRecord::Migration
+  def self.up
+    drop_column :player_weapons, :attack_score
+    drop_column :player_weapons, :defense_score
+    add_column :player_weapons, :player_id, :integer
+    add_column :player_weapons, :times_played, :integer, :default => 0
+  end
+
+  def self.down
+    drop_column :player_weapons, :player_id
+    drop_column :player_weapons, :times_played
+    add_column :player_weapons, :attack_score, :integer, :default => 0
+    add_column :player_weapons, :defense_score, :integer, :default => 0
+  end
+end

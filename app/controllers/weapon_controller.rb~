@@ -1,6 +1,0 @@
-class WeaponController < ApplicationController
-  def index
-    # @weapons = Weapons.find(:all)
-  end
-
-end

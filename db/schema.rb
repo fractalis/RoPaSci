@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100408091837) do
+ActiveRecord::Schema.define(:version => 20100410003221) do
 
   create_table "achievements", :force => true do |t|
     t.string   "title"
@@ -19,12 +19,35 @@ ActiveRecord::Schema.define(:version => 20100408091837) do
     t.datetime "updated_at"
   end
 
-  create_table "player_weapons", :force => true do |t|
-    t.integer  "level"
-    t.integer  "attack_score"
-    t.integer  "defense_score"
+  create_table "games", :force => true do |t|
+    t.integer  "player1_id"
+    t.integer  "player2_id"
+    t.integer  "player1_hp"
+    t.integer  "player2_hp"
+    t.integer  "round_num"
+    t.integer  "winner"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "player_weapons", :force => true do |t|
+    t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "player_id"
+    t.integer  "times_played", :default => 0
+    t.integer  "weapon_id"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "player_name",                :null => false
+    t.integer  "user_id",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "wins",        :default => 0
+    t.integer  "losses",      :default => 0
+    t.integer  "draws",       :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -57,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20100408091837) do
     t.datetime "updated_at"
     t.float    "base_hp_regen"
     t.float    "mod_hp_regen"
+    t.string   "image_url"
   end
 
 end
