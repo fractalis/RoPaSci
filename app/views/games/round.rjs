@@ -1,0 +1,11 @@
+page.replace_html('player1-hp',@game.player1_hp)
+page.replace_html('player2-hp',@game.player2_hp)
+
+page.replace_html('player1-choice',@pweapon1.weapon.name)
+page.replace_html('player2-choice',@pweapon2.weapon.name)	
+
+if !@winner.nil?
+   page.replace_html('winner',"<h2>#{@winner.player_name} is the winner!")
+   page.toggle('player-weapons')
+   page.toggle('player-weapons-header')
+end

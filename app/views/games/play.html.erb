@@ -1,0 +1,49 @@
+<div class="box">
+  <h2>Showdown</h2>
+
+  <table class="game">
+    <tr>
+      <td><%= @player1.player_name %></td>
+      <td colspan="2">VERSUS</td>
+      <td><%= @player2.player_name %></td>
+    </tr>
+    <tr>
+      <td><b>Player 1 HP:</b></td>
+      <td id="player1-hp-td"><span id="player1-hp"><%= @game.player1_hp %></span></td>
+      <td><b>Player 2 HP:</b></td>
+      <td id="player2-hp-td"><span id="player2-hp"><%= @game.player2_hp %></span></td>
+    </tr>
+    <tr>
+      <td><b>Player 1 Chose:</b></td>
+      <td><span id="player1-choice"></span></td>
+      <td><b>Player 2 Chose:</b></td>
+      <td><span id="player2-choice"></span></td>
+    </tr>
+  </table>
+  <p/>
+ 
+  <h1 id="player-weapons-header"><%= @player1.player_name%>, choose your weapon:</h1>
+  <table style="margin-left: 10%;">
+    <tr id="player-weapons">
+      <% @player1.player_weapons.each do |pweapon| %>
+        <% wpn = pweapon.weapon %>
+      <td><%= link_to_remote image_tag(wpn.image_url, :size => "128x128"), :url => {:controller => "games", :action => "round", :gameid => @game.id, :pw1 => pweapon.id, :compid => @player2.id} %></td>
+      <td>
+	<b>Level: </b><%= pweapon.level %><br/>
+	<b>Name: </b><%= wpn.name %><br/>
+	<b>Attack: </b><%= wpn.calc_attack(pweapon.level) %><br/>
+	<b>Defense: </b><%= wpn.calc_defense(pweapon.level) %><br />
+	<b>HP Regen: </b><%= wpn.calc_hp_regen(pweapon.level) %><br />
+      </td>
+    <% end %>
+    </tr>
+  </table>  
+
+  <% if !@message.nil? %>
+    <h2><%= @message %></h2>
+  <% end %>
+
+  <div id="winner">
+
+  </div>
+</div>

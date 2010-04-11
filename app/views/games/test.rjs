@@ -1,0 +1,2 @@
+page.visual_effect(:highlight, 'player1-hp-td', :duration => '1.0', :endcolor => '#9fef9f', :startcolor => '#000000' )
+page.visual_effect(:highlight, 'player2-hp-td', :duration => '1.0', :endcolor => '#ef9f9f', :startcolor => '#000000')

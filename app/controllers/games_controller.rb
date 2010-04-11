@@ -4,7 +4,9 @@ class GamesController < ApplicationController
   before_filter :player_game?, :only => [:show]
 
   def index
-    @games = Game.find(:all)
+    user = @current_user
+    pid = user.player.id
+    @games = Game.find(:all,:conditions => ["player1_id = ? or player2_id = ?",pid,pid])
   end
 
   def new
@@ -20,10 +22,40 @@ class GamesController < ApplicationController
         
     if @game.save
       flash[:notice] = "Starting New Game"
-      redirect_to game_url @game.id
+      redirect_to :action => "play", :id => @game.id
     else
       flash[:notice] = "Could not start new game"
       render :action => :new
+    end
+  end
+  
+  def round
+
+    @game = Game.find_by_id(params[:gameid])
+
+    if @game.active
+      @pweapon1 = PlayerWeapon.find_by_id(params[:pw1])
+      @pweapon2 = PlayerWeapon.select_random_weapon(params[:compid])
+      
+      @game.perform_round(@pweapon1,@pweapon2)
+      
+      if @game.winner?
+        @game.winner! # Update the winner
+        @winner = Player.find_by_id(@game.winner) unless (@game.winner.nil? || @game.winner == 0)        
+      else
+        
+      end
+    end
+  end
+
+  def play
+    @game = Game.find_by_id(params[:id])
+    if !@game.active
+      flash[:error] = "Game is no longer active"
+      redirect_to account_url unless @game.active
+    else
+      @player1 = Player.find_by_id(@game.player1_id)
+      @player2 = Player.find_by_id(@game.player2_id)
     end
   end
 
@@ -34,13 +66,13 @@ class GamesController < ApplicationController
   def destroy
   end
 
-  private
-  
+  private      
   def player_game?
-    # @user = @current_user
-    @game = Game.find_by_id(params[:id])
-    
-    render :nothing, :status => 403 unless !@game.nil?
+    @game = Game.find_by_id(params[:id])   
+    unless !@game.nil?
+      render :text => "Access Denied", :status => 403
+      return
+    end    
     @game.player_in_game?(3)
   end
 

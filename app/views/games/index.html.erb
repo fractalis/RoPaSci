@@ -7,17 +7,23 @@
       <th>Player 2 HP</th>
       <th>Round Num</th>
       <th>Winner</th>
-      <th>Active</th>
+      <th>Play</th>
     </tr>
     <% @games.each do |game| %>
     <tr>
-      <td><%= game.player1_id %></td>
-      <td><%= game.player2_id %></td>
+      <td><%= Player.player_name_by_id(game.player1_id) %></td>
+      <td><%= Player.player_name_by_id(game.player2_id) %></td>
       <td><%= game.player1_hp %></td>
       <td><%= game.player2_hp %></td>
       <td><%= game.round_num %></td>
-      <td><%= game.winner %></td>
-      <td><%= game.active %></td>
+      <td><%= Player.player_name_by_id(game.winner) %></td>
+      <td>
+	<% if game.active %>
+	 <%= link_to :action => "play", :id => game.id %>
+	<% else %>
+	 <b>Finished</b>
+	<% end %>
+      </td>
     </tr>
     <% end %>
   </table>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100410003221) do
+ActiveRecord::Schema.define(:version => 20100411093701) do
 
   create_table "achievements", :force => true do |t|
     t.string   "title"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(:version => 20100410003221) do
   create_table "games", :force => true do |t|
     t.integer  "player1_id"
     t.integer  "player2_id"
-    t.integer  "player1_hp"
-    t.integer  "player2_hp"
+    t.float    "player1_hp"
+    t.float    "player2_hp"
     t.integer  "round_num"
     t.integer  "winner"
     t.boolean  "active"

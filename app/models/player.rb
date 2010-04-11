@@ -26,4 +26,19 @@ class Player < ActiveRecord::Base
     pweapon = PlayerWeapon.find_by_weapon_id(weapon.id)
     pweapon.times_played.increment!
   end
+
+  def self.update_stats!(winner,loser)
+    winner = Player.find_by_id(winner)
+    loser = Player.find_by_id(loser)
+    
+    winner.wins += 1
+    loser.losses += 1
+    
+    winner.save && loser.save    
+  end
+
+  def self.player_name_by_id(id)
+    player = self.find_by_id(id)
+    player.player_name unless player.nil?
+  end    
 end
