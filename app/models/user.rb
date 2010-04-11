@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   acts_as_authentic
   has_one :player
 
+  # Creates the player, given the players name as their
+  # login. Also initializes the players weapon, returning
+  # nil in any case that updates fail.
   def create_player
     return if !player.nil?
 

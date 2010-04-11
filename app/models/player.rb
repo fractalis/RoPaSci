@@ -5,9 +5,11 @@ class Player < ActiveRecord::Base
   validates_presence_of :player_name, :user_id
 
   def total_games
-    wins + losses + draws
+    self.wins + self.losses + self.draws
   end
 
+  # Creates Player's weapon at player creation, which is
+  # a side effect of new user creation.
   def create_weapons
     return if self.id.nil?
     weapons = Weapon.find(:all)    
@@ -27,6 +29,9 @@ class Player < ActiveRecord::Base
     pweapon.times_played.increment!
   end
 
+  # Update w/ side-effects the stats of
+  # players from a game. The winner's stats
+  # and loser's stats will be updated as appropriate.
   def self.update_stats!(winner,loser)
     winner = Player.find_by_id(winner)
     loser = Player.find_by_id(loser)
@@ -37,6 +42,9 @@ class Player < ActiveRecord::Base
     winner.save && loser.save    
   end
 
+  # Convenience function to find the name of a
+  # player given that players id. Returns nil
+  # if player id is invalid
   def self.player_name_by_id(id)
     player = self.find_by_id(id)
     player.player_name unless player.nil?

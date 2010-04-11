@@ -1,49 +1,38 @@
 class Game < ActiveRecord::Base
   
-  def self.rules(p1,p2)
-    player1 = Player.find_by_id(p1[:player_id])
-    player2 = Player.find_by_id(p2[:player_id])
-    
-    player1_wpn = PlayerWeapon.find_by_id(p1[:player_weapon_id])
-    player2_wpn = PlayerWeapon.find_by_id(p2[:player_weapon_id])
-    
-    hp_loss = PlayerWeapon.perform_attack(player1_wpn,player2_wpn)
-  end
-
-  def player_one
-    player = Player.find_by_id(@player1_id)
-    player unless player.nil?
-  end
-
-  def player_two
-    player = Player.find_by_id(@player2_id)
-    player unless player.nil?
-  end
-
+  # Queries to check if the given player id represents
+  # a player in the game.
   def player_in_game?(id)
     nil unless player1_id == id or player2_id == id    
   end
 
+  # Non-DB destructive function for subtracting hp for players
   def lose_hp(p1_hp_loss, p2_hp_loss)
-    self.player1_hp -= p1_hp_loss
-    self.player2_hp -= p2_hp_loss
+    # Don't update HP if defense completely negated the attack
+    self.player1_hp -= p1_hp_loss unless p1_hp_loss < 0
+    self.player2_hp -= p2_hp_loss unless p2_hp_loss < 0
     self
   end
 
+  # Updates DB automatically after HP loss.
   def lose_hp!(p1_hp_loss, p2_hp_loss)
     self.lose_hp(p1_hp_loss,p2_hp_loss).save
   end
   
+  # Non-DB Destructive func for regaining HP
   def regen_hp(p1_hp_regen, p2_hp_regen)
     self.player1_hp += p1_hp_regen
     self.player2_hp += p2_hp_regen
     self
   end
 
+  # Updates DB automatically after HP regen
   def regen_hp!(p1_hp_regen, p2_hp_regen)
     self.regen_hp(p1_hp_regen,p2_hp_regen).save
   end
 
+  # Applies Player's weapons in a round, updating each
+  # players HP as appropriate.
   def perform_round(pweapon1, pweapon2)    
     hp_loss = PlayerWeapon.perform_attack(pweapon1,pweapon2)
     hp_regen = PlayerWeapon.perform_hp_regen(pweapon1,pweapon2)
