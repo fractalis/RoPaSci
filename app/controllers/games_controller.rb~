@@ -1,0 +1,36 @@
+class GamesController < ApplicationController
+
+  before_filter :require_user
+
+  def index
+    @games = Game.find(:all)
+  end
+
+  def new
+    @game = Game.new
+    @player = @current_user.player    
+    @player2 = User.find_by_id(2).player   
+  end
+
+  def create
+    @game = Game.new(params[:game])
+    @game.active = true
+    @game.round_num = 1
+        
+    if @game.save
+      flash[:notice] = "Starting New Game"
+      redirect_to games_url
+    else
+      flash[:notice] = "Could not start new game"
+      render :action => :new
+    end
+  end
+
+  def show
+    
+  end
+
+  def destroy
+  end
+  
+end

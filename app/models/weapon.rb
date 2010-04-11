@@ -1,5 +1,5 @@
 class Weapon < ActiveRecord::Base
-  
+
   def calc_attack(level)
     return if self.nil?
     base_attack + (level * mod_attack)
@@ -20,9 +20,9 @@ class Weapon < ActiveRecord::Base
     {:p1_hp_loss => p1_hp_loss, :p2_hp_loss => p2_hp_loss}
   end
 
-  def self.calc_hp_regain(weapon_hp)
-    weapon = Weapon.find_by_name(weapon_hp[:weapon_name])
-    weapon.base_hp_regen + (weapon.mod_hp_regen * weapon_hp[:level])
+  def calc_hp_regen(level)
+    return if self.nil?
+    base_hp_regen + (level * mod_hp_regen)
   end
   
 end

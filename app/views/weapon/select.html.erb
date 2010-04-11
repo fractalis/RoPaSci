@@ -1,0 +1,21 @@
+<div class="box">
+
+  <h2>Please select a weapon:</h2><br/>
+  <table style="margin-left: 25%; ">
+    <% @player_weapons.each do |wpn| %>
+    <tr>
+      <td><%= image_tag(wpn.weapon.image_url, :size => "128x128") %></td>
+      <td>
+	<b>Weapon Name:</b> <%= wpn.weapon.name %><br/>
+	<b>Weapon Level:</b> <%= wpn.level %><br/>
+	<b>Times Used:</b> <%= wpn.times_played %><br/>
+      </td>
+      <td>
+	<b>Calculated Attack:</b> <%= wpn.weapon.calc_attack(wpn.level) %><br/>
+	<b>Calculated Defense:</b> <%= wpn.weapon.calc_defense(wpn.level) %><br />
+	<b>Calculated HP Regen:</b> <%= wpn.weapon.calc_hp_regen(wpn.level) %><br />
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

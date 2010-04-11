@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
     player = Player.new
     player.user_id = id
     player.player_name = login
-    player.save
+    
+    return nil if !player.save
+    return nil if !player.create_weapons
+    
+    player
   end
 
 end

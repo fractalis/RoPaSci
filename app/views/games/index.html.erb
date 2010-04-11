@@ -1,0 +1,24 @@
+<div class="box">
+  <table>
+    <tr>
+      <th>Player 1</th>
+      <th>Player 2</th>
+      <th>Player 1 HP</th>
+      <th>Player 2 HP</th>
+      <th>Round Num</th>
+      <th>Winner</th>
+      <th>Active</th>
+    </tr>
+    <% @games.each do |game| %>
+    <tr>
+      <td><%= game.player1_id %></td>
+      <td><%= game.player2_id %></td>
+      <td><%= game.player1_hp %></td>
+      <td><%= game.player2_hp %></td>
+      <td><%= game.round_num %></td>
+      <td><%= game.winner %></td>
+      <td><%= game.active %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

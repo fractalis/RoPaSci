@@ -1,0 +1,12 @@
+<div class="box">
+     <h2>Start New Game?</h2>
+     <% form_for @game, :url => games_path do |f| %>
+      <%= hidden_field_tag 'game[player1_id]', @player.id %>
+      <%= hidden_field_tag 'game[player2_id]', @player2.id %>
+      <%= hidden_field_tag 'game[player1_hp]', 10 %>
+      <%= hidden_field_tag 'game[player2_hp]', 10 %>
+      <%= f.hidden_field :active, :value => "true" %>
+      <%= f.hidden_field :round_num, :value => 1 %>
+      <%= f.submit "Start New Game" %>
+     <% end %>
+</div>

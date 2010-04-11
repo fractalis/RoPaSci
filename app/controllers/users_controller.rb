@@ -19,8 +19,6 @@ class UsersController < ApplicationController
 
   def show
     @user = @current_user
-    @user.create_player
-    @player = @user.player
   end
 
   def edit
