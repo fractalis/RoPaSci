@@ -32,14 +32,24 @@ class Player < ActiveRecord::Base
   # Update w/ side-effects the stats of
   # players from a game. The winner's stats
   # and loser's stats will be updated as appropriate.
-  def self.update_stats!(winner,loser)
-    winner = Player.find_by_id(winner)
-    loser = Player.find_by_id(loser)
+  def self.update_stats!(winner_id,loser_id)
+    winner = Player.find_by_id(winner_id)
+    loser = Player.find_by_id(loser_id)
     
     winner.wins += 1
     loser.losses += 1
     
     winner.save && loser.save    
+  end
+
+  def self.update_draw!(p1_id,p2_id)
+    player1 = Player.find_by_id(p1_id)
+    player2 = Player.find_by_id(p2_id)
+    
+    player1.draws += 1
+    player2.draws += 1
+
+    player1.save && player2.save
   end
 
   # Convenience function to find the name of a

@@ -45,11 +45,9 @@ class Game < ActiveRecord::Base
 
   # Updates the Winner
   def winner!
-    return nil unless self.winner?
+    return nil unless self.winner? || self.draw?
     
-    if self.draw?
-      self.winner = 0
-    elsif self.player1_hp <= 0
+    if self.player1_hp <= 0
       self.winner = self.player2_id
       Player.update_stats!(self.winner,self.player1_id)
     else
@@ -59,11 +57,18 @@ class Game < ActiveRecord::Base
 
     self.active = 0;
     self.save && self.winner    
-  end
+  end  
 
   def winner?
      self.player1_hp <= 0 || self.player2_hp <= 0      
   end    
+
+  def draw!
+    Player.update_draw!(self.player1_id,self.player2_id)
+
+    self.active = 0;
+    self.save
+  end
   
   def draw?
     self.player1_hp <= 0 && self.player2_hp <= 0

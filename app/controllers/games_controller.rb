@@ -39,11 +39,12 @@ class GamesController < ApplicationController
       
       @game.perform_round(@pweapon1,@pweapon2)
       
-      if @game.winner?
+      if @game.winner? && !@game.draw?
         @game.winner! # Update the winner
         @winner = Player.find_by_id(@game.winner) unless (@game.winner.nil? || @game.winner == 0)        
-      else
-        
+      elsif @game.draw?
+        @game.draw!
+        @message = "Game was a draw!"        
       end
     end
   end

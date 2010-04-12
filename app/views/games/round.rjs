@@ -9,3 +9,9 @@ if !@winner.nil?
    page.toggle('player-weapons')
    page.toggle('player-weapons-header')
 end
+
+if !@message.nil?
+   page.replace_html('message',"<h2>Game was a draw!")
+   page.toggle('player-weapons')
+   page.toggle('player-weapons-header')
+end

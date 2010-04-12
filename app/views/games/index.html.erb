@@ -16,10 +16,16 @@
       <td><%= game.player1_hp %></td>
       <td><%= game.player2_hp %></td>
       <td><%= game.round_num %></td>
-      <td><%= Player.player_name_by_id(game.winner) %></td>
+      <td>
+	<% if game.winner.nil? and !game.active %>
+	Draw
+	<% else %>
+	    <%= Player.player_name_by_id(game.winner) %>
+	<% end %>
+      </td>
       <td>
 	<% if game.active %>
-	 <%= link_to :action => "play", :id => game.id %>
+	 <%= link_to "Continue Game", :action => "play", :id => game.id %>
 	<% else %>
 	 <b>Finished</b>
 	<% end %>
